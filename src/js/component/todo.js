@@ -4,7 +4,21 @@ import React, { useState } from "react";
 
 export const ToDoList = () => {
 	const [todo, setTodo] = useState([]);
-	const [input, setInput] = useState();
+    const [input, setInput] = useState();
+    
+    const syncAPI = () => {
+        fetch('https://assets.breatheco.de/apis/fake/todos/user/KJCastillo')
+            .then(response => response.json())
+            .then(data => {
+                setList(data);
+            });
+    };
+
+    useEffect(()=>{ 
+      syncAPI();
+}, []);
+
+
 	function addTodo(todos) {
 		setTodo([...todo, todos]);
 	}
